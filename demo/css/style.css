@@ -1,0 +1,339 @@
+@font-face {
+  font-family: 'Galmuri9';
+  src: url('../fonts/Galmuri9.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font:        'Galmuri9', monospace;
+  --bg:          #3e5068;
+  --panel:       #4b5f73;
+  --chart-bg:    #3a4d61;
+  --green:       #00ff41;
+  --red:         #ff3a3a;
+  --btn-trade:   #4aaf1e;
+  --btn-close:   #cc2222;
+  --btn-sell:    #cc3344;
+  --btn-sell-sh: #8a1f28;
+  --btn-buy:     #2a9040;
+  --btn-buy-sh:  #1a6030;
+  --text:        #ffffff;
+  --text-dim:    rgba(255,255,255,0.6);
+  --price-line:  rgba(180,190,210,0.7);
+  --accent:      #5566ff;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── 앱 레이아웃 ─────────────────────────────── */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 6px 6px 0;
+  gap: 6px;
+}
+
+/* ── 패널 공통 ────────────────────────────────── */
+.panel {
+  background: var(--panel);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ── 상단 버튼 바 ─────────────────────────────── */
+#topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 0 2px;
+}
+
+.topbar-side {
+  flex: 1;
+}
+
+.topbar-side.right-side {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-btn {
+  font-family: var(--font);
+  font-size: 16px;
+  color: var(--text);
+  border: none;
+  border-radius: 6px;
+  padding: 7px 20px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+.top-btn:active { opacity: 0.8; transform: scale(0.97); }
+
+.top-btn.green-btn {
+  background: var(--btn-trade);
+  box-shadow: 0 3px 0 #2d7010;
+  min-width: 130px;
+}
+.top-btn.red-btn {
+  background: var(--btn-close);
+  box-shadow: 0 3px 0 #881111;
+}
+
+/* ── 정보 패널 ────────────────────────────────── */
+#info-panel {
+  flex-shrink: 0;
+  padding: 8px 12px 10px;
+}
+
+#info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+
+#pnl-pct {
+  font-size: 32px;
+  line-height: 1;
+}
+
+#pnl-val {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+#info-side {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+#info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2px;
+  column-gap: 4px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+#info-grid span {
+  color: var(--text);
+}
+
+.green-text { color: var(--green); }
+.red-text   { color: var(--red);   }
+
+/* ── 차트 패널 ────────────────────────────────── */
+#chart-panel {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#price-display {
+  padding: 5px 10px 3px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--panel);
+  flex-shrink: 0;
+}
+
+#chart {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+  display: block;
+}
+
+#chart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px 6px;
+  flex-shrink: 0;
+  background: var(--panel);
+}
+
+#speed-label {
+  font-size: 30px;
+  color: var(--text);
+}
+
+
+/* ── 주문 섹션 ────────────────────────────────── */
+#order-section {
+  flex-shrink: 0;
+  padding: 4px 4px 6px;
+}
+
+#qty-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+  padding: 0 4px;
+}
+
+#qty-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 4px;
+  outline: none;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+#qty-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+#qty-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+}
+
+/* ── 매도/매수 버튼 ───────────────────────────── */
+#action-row {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 8px 16px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: transform 0.08s, opacity 0.08s;
+}
+.action-btn:active { transform: translateY(4px); opacity: 0.85; }
+
+.btn-main {
+  font-size: 28px;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+.btn-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.4em;
+}
+
+.sell-btn {
+  background: var(--btn-sell);
+  box-shadow: 0 6px 0 var(--btn-sell-sh);
+}
+.buy-btn {
+  background: var(--btn-buy);
+  box-shadow: 0 6px 0 var(--btn-buy-sh);
+}
+
+/* ── 종료 오버레이 ────────────────────────────── */
+#end-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 20, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+#end-screen.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#end-box {
+  width: 88%;
+  max-width: 360px;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.end-title {
+  font-size: 16px;
+  color: var(--text-dim);
+}
+
+#end-amount {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#end-sub {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.6;
+}
+
+#cta-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 14px 0;
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #2233aa;
+  letter-spacing: 0.04em;
+}
+#cta-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #2233aa; }
+
+#replay-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--text-dim);
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-family: var(--font);
+  font-size: 13px;
+  cursor: pointer;
+  width: 100%;
+}

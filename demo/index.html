@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TheMoney</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- 상단 버튼 바 -->
+  <div id="topbar">
+    <div class="topbar-side"></div>
+    <button class="top-btn green-btn" id="trade-title">트레이드</button>
+    <div class="topbar-side right-side">
+      <button class="top-btn red-btn" id="close-btn">닫기</button>
+    </div>
+  </div>
+
+  <!-- 정보 패널 -->
+  <div class="panel" id="info-panel">
+    <div id="info-header">
+      <span id="pnl-pct" class="green-text">0.0 %</span>
+      <span id="pnl-val">0원</span>
+    </div>
+    <div id="info-side">구분 : <span id="side-val">-</span></div>
+    <div id="info-grid">
+      <div>평가 : <span id="evaluation">0원</span></div>
+      <div>진입가 : <span id="entry-val">-</span></div>
+      <div>수량 : <span id="quantity">-</span></div>
+      <div>익절가 : <span id="tp-val">-</span></div>
+      <div>잔액 : <span id="balance">100만원</span></div>
+      <div>손절가 : <span id="sl-val">-</span></div>
+    </div>
+  </div>
+
+  <!-- 차트 패널 -->
+  <div class="panel" id="chart-panel">
+    <div id="price-display">
+      <span id="price-text">1200.0원 (▼ 0.0원)</span>
+    </div>
+    <canvas id="chart"></canvas>
+    <div id="chart-footer">
+      <span id="speed-label">x1</span>
+    </div>
+  </div>
+
+  <!-- 주문 섹션 -->
+  <div id="order-section">
+    <div id="qty-label">주문수량 : (<span id="qty-amount">100만</span> / <span id="qty-max">100만</span>)</div>
+    <input type="range" id="qty-slider" min="0.05" max="1" step="0.05" value="1">
+    <div id="action-row">
+      <button class="action-btn sell-btn" id="sell-btn">
+        <span class="btn-main">매도하기</span>
+        <span class="btn-sub">─ ─</span>
+      </button>
+      <button class="action-btn buy-btn" id="buy-btn">
+        <span class="btn-main">매수하기</span>
+        <span class="btn-sub">─ ─</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- 종료 오버레이 -->
+<div id="end-screen">
+  <div id="end-box" class="panel">
+    <div class="end-title">결과</div>
+    <div id="end-amount" class="green-text">+0원</div>
+    <div id="end-sub"></div>
+    <button id="cta-btn">지금 무료로 시작하기</button>
+    <button id="replay-btn">다시 해보기</button>
+  </div>
+</div>
+
+<script src="js/engine.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
