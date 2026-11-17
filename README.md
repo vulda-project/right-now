@@ -3,7 +3,7 @@
 ---
 
 **언어 선택 / Language / 语言:**
-[한국어](#한국어) | [English](#english) | [中文](#中文)
+[한국어](#한국어) | [English](#english) | [中文](#中文) | [계정 삭제 요청 / Account deletion / 账户删除](account-deletion.html)
 
 ---
 
